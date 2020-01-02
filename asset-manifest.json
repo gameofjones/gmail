@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/gmail/static/css/main.d1b05096.chunk.css",
+    "main.js": "/gmail/static/js/main.f13cf33e.chunk.js",
+    "main.js.map": "/gmail/static/js/main.f13cf33e.chunk.js.map",
+    "runtime-main.js": "/gmail/static/js/runtime-main.8451fab1.js",
+    "runtime-main.js.map": "/gmail/static/js/runtime-main.8451fab1.js.map",
+    "static/js/2.bed347b4.chunk.js": "/gmail/static/js/2.bed347b4.chunk.js",
+    "static/js/2.bed347b4.chunk.js.map": "/gmail/static/js/2.bed347b4.chunk.js.map",
+    "index.html": "/gmail/index.html",
+    "precache-manifest.890b643b3ef96af26097e89639106474.js": "/gmail/precache-manifest.890b643b3ef96af26097e89639106474.js",
+    "service-worker.js": "/gmail/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/gmail/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.bed347b4.chunk.js.LICENSE": "/gmail/static/js/2.bed347b4.chunk.js.LICENSE",
+    "static/media/logo.svg": "/gmail/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8451fab1.js",
+    "static/js/2.bed347b4.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.f13cf33e.chunk.js"
+  ]
+}

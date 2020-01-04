@@ -5,10 +5,6 @@ import 'typeface-roboto';
 import { css } from "emotion";
 import LabelPanel from "./components/LabelPanel"
 
-const mockLabels = [
-  "Inbox", "Snoozed", "Important", "Sent", "Drafts", "Trash"
-]
-
 const mockCustom = ["Receipts"]
 
 function App() {
@@ -18,7 +14,7 @@ function App() {
         <TextField id="standard-basic" label="Search" />
       </div>
       <div className={styles.panelContainer}>
-        <LabelPanel labels={mockLabels} custom={mockCustom} />
+        <LabelPanel custom={mockCustom} />
         <div className={styles.emailPanel}></div>
         <div className={styles.previewPanel}></div>
       </div>

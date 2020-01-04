@@ -27,6 +27,6 @@ const styles = {
     padding: "5px 0",
   }),
   selected: css({
-    color: "black",
+    color: "#2979FF",
   })
 }

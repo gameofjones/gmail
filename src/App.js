@@ -1,5 +1,8 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input'
+import SearchIcon from "@material-ui/icons/Search"
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Typography from "@material-ui/core/Typography"
 import './App.css';
 import 'typeface-roboto';
 import { css } from "emotion";
@@ -10,10 +13,20 @@ const mockCustom = ["Receipts"]
 function App() {
   return (
     <div className={styles.app}>
+      <Typography variant="h4" style={{ fontWeight: "bold", letterSpacing: "2px", padding: "15px 15px 15px 30px", color: "#2979FF"}}>
+        G<label style={{ color: "red" }}>O</label><label style={{ color: "#FDD835" }}>J</label>
+      </Typography>
       <div className={styles.toolbar}>
-        <TextField id="standard-basic" label="Search" />
+        <Input
+          id="standard-adornment-amount"
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon style={{ color: "#2979FF" }}/>
+            </InputAdornment>
+          }
+        />
       </div>
-      <div className={styles.panelContainer}>
+      <div className={styles.panelContainer}> 
         <LabelPanel custom={mockCustom} />
         <div className={styles.emailPanel}></div>
         <div className={styles.previewPanel}></div>
@@ -36,6 +49,7 @@ const styles = {
     "align-items": "center",
     padding: "0 30px 0",
     backgroundColor: "#FCFCFA",
+    color: "#2962FF",
     border: appBorder,
   }),
   panelContainer: css({

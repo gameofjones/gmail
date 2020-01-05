@@ -6,9 +6,26 @@ import Typography from "@material-ui/core/Typography"
 import './App.css';
 import 'typeface-roboto';
 import { css } from "emotion";
-import LabelPanel from "./components/LabelPanel"
+import { LabelPanel, EmailTab } from "./components"
 
 const mockCustom = ["Receipts"]
+const mockEmails = [
+  {
+    subject: "First Email",
+    sender: "author@gmail.com",
+    sent: "8:08 AM"
+  },
+  {
+    subject: "Second Email",
+    sender: "Kiah Jones",
+    sent: "Fri 3:20 PM"
+  },
+  {
+    subject: "Third Email",
+    sender: "Deep Badesha",
+    sent: "Fri 3:20 PM"
+  },
+]
 
 function App() {
   return (
@@ -28,8 +45,23 @@ function App() {
       </div>
       <div className={styles.panelContainer}> 
         <LabelPanel custom={mockCustom} />
-        <div className={styles.emailPanel}></div>
-        <div className={styles.previewPanel}></div>
+        <div className={styles.emailPanel}>
+          {
+            mockEmails.map((email, index) => 
+              <EmailTab
+                index={index}
+                subject={email.subject}
+                sender={email.sender}
+                sent={email.sent}
+              />
+            )
+          }
+        </div>
+        <div className={styles.previewPanel}>
+          <Typography variant="h5" gutterBottom>
+            Lorem Ipsum
+          </Typography>
+        </div>
       </div>
     </div>
   );
@@ -53,17 +85,18 @@ const styles = {
     border: appBorder,
   }),
   panelContainer: css({
-    height: "calc(100vh - 80px)",
+    height: "calc(100vh - 155px)",
     display: "flex",
     padding: "0 30px 0",
   }),
   emailPanel: css({
     flex: "0 400px",
-    backgroundColor: "#F9F9F8",
-    borderLeft: "1px solid #F4F4F4"
+    borderLeft: "1px solid #F4F4F4",
   }),
   previewPanel: css({
     flex: 1,
     borderLeft: appBorder,
+    color: "#585858",
+    padding: "20px 30px",
   }),
 }

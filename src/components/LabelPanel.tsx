@@ -13,7 +13,7 @@ import LensIcon from "@material-ui/icons/Lens"
 import Label from "./Label"
 
 interface LabelPanelProps {
-  custom: string[],
+  custom: string[]
 }
 
 const LabelPanel: FunctionComponent<LabelPanelProps> = ({ custom }) => {

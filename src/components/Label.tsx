@@ -3,8 +3,8 @@ import { css, cx } from "emotion"
 import Typography from "@material-ui/core/Typography"
 
 interface LabelProps {
-  name: string,
-  selected?: boolean,
+  name: string
+  selected?: boolean
 }
 
 const Label: FunctionComponent<LabelProps> = ({ name, children, selected }) => {

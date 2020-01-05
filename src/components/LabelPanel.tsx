@@ -37,11 +37,9 @@ const LabelPanel: FunctionComponent<LabelPanelProps> = ({ custom }) => {
       {
         custom.map((label, index) => {
           return (
-          <div key={index} className={styles.label}>
-            <Typography variant="subtitle2" gutterBottom>
-              <LensIcon style={{ height: "10px", color: "red" }} />{label}
-            </Typography>
-          </div>
+            <Label key={index} name={label}>
+              <LensIcon style={{ height: "10px", color: "red" }} />
+            </Label>
           )
         })
       }

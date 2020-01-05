@@ -10,8 +10,9 @@ interface LabelProps {
 const Label: FunctionComponent<LabelProps> = ({ name, children, selected }) => {
   return (
     <div className={cx(styles.label, { [styles.selected]: selected })}>
-      <Typography variant="subtitle2" gutterBottom>
-        {children}{name}
+      {children}
+      <Typography variant="subtitle2" style={{ margin: "2px auto 0 4px" }} gutterBottom>
+        {name}
       </Typography>
     </div>
   )
@@ -25,6 +26,10 @@ const styles = {
     "align-items": "center",
     color: "darkgray",
     padding: "5px 0",
+    ":hover": {
+      color: "#2979FF",
+      cursor: "pointer",
+    }
   }),
   selected: css({
     color: "#2979FF",

@@ -16,7 +16,7 @@ const mockEmails = [
     sent: "8:08 AM"
   },
   {
-    subject: "Second Email",
+    subject: "Second Email with a longer name ya'llvgvggggggggg",
     sender: "Kiah Jones",
     sent: "Fri 3:20 PM"
   },

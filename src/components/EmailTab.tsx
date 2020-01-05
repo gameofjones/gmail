@@ -17,7 +17,7 @@ const EmailTab: FunctionComponent<EmailTabProps> = ({ index, subject, sender, se
       <div className={styles.leftSide} style={{ backgroundColor: "#FBC02D" }} />
       <div className={cx(styles.contents, { [styles.altBackground]: index%2 === 0 })}>
         <div style={{ flex: 1 }}>
-          <label style={styles.subject}>{subject}</label>
+          <label className={styles.subject}>{subject}</label>
           <Typography
             variant="caption"
             display="block"
@@ -61,9 +61,14 @@ const styles = {
   altBackground: css({
     backgroundColor: "#F1F1F1",
   }),
-  subject: {
+  subject: css({
     padding: "10px",
-  },
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    maxWidth: "285px",
+    display: "block",
+  }),
   sender: {
     padding: "10px 10px 10px 12px"
   },

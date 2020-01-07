@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography"
 import './App.css';
 import 'typeface-roboto';
 import { css } from "emotion";
-import { LabelPanel, EmailTab } from "./components"
+import { LabelPanel, EmailTab, PreviewPanel } from "./components"
 
 const mockCustom = ["Receipts"]
 const mockEmails = [
@@ -57,11 +57,12 @@ function App() {
             )
           }
         </div>
-        <div className={styles.previewPanel}>
-          <Typography variant="h5" gutterBottom>
-            Lorem Ipsum
-          </Typography>
-        </div>
+        <PreviewPanel
+          sender={"Kiah Jones"}
+          recipients={["Madhu Rawat", "Deep Badesha"]}
+          subject={"First Email"}
+          body={""}
+        />
       </div>
     </div>
   );
@@ -93,10 +94,5 @@ const styles = {
     flex: "0 400px",
     borderLeft: "1px solid #F4F4F4",
   }),
-  previewPanel: css({
-    flex: 1,
-    borderLeft: appBorder,
-    color: "#585858",
-    padding: "20px 30px",
-  }),
+
 }

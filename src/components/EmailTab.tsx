@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
 import { css, cx } from "emotion"
 import Typography from "@material-ui/core/Typography"
 import AttachFileIcon from "@material-ui/icons/AttachFile"
@@ -11,11 +11,16 @@ interface EmailTabProps {
   selected?: boolean,
 }
 
-const EmailTab: FunctionComponent<EmailTabProps> = ({ index, subject, sender, sent }) => {
+const EmailTab: FunctionComponent<EmailTabProps> = ({ index, subject, sender, sent, selected }) => {
+  const [isSelected, setSelected] = useState(selected)
+
   return (
-    <div className={styles.tab}>
-      <div className={styles.leftSide} style={{ backgroundColor: "#FBC02D" }} />
-      <div className={cx(styles.contents, { [styles.altBackground]: index%2 === 0 })}>
+    <div
+      className={cx(styles.tab, { [styles.altBackground]: index%2 === 0 })}
+      onClick={() => setSelected(!isSelected)}
+    >
+      <div className={cx(styles.leftSide, { [styles.selected]: isSelected })} />
+      <div className={styles.contents}>
         <div style={{ flex: 1 }}>
           <label className={styles.subject}>{subject}</label>
           <Typography
@@ -46,20 +51,20 @@ export default EmailTab
 const styles = {
   tab: css({
     display: "flex",
-  }),
-  contents: css({
-    flex: 1,
-    display: "flex",
-    padding: "20px 20px 10px 20px",
-    color: "#585858",
-    backgroundColor: "#F9F9F8",
     cursor: "pointer",
+    backgroundColor: "#F9F9F8",
     ":hover": {
       backgroundColor: "#BBDEFB"
     },
   }),
   altBackground: css({
     backgroundColor: "#F1F1F1",
+  }),
+  contents: css({
+    flex: 1,
+    display: "flex",
+    padding: "20px 20px 10px 20px",
+    color: "#585858",
   }),
   subject: css({
     padding: "10px",
@@ -68,9 +73,10 @@ const styles = {
     textOverflow: "ellipsis",
     maxWidth: "285px",
     display: "block",
+    cursor: "pointer",
   }),
   sender: {
-    padding: "10px 10px 10px 12px"
+    padding: "10px 10px 10px 12px",
   },
   leftSide: css({
     flex: "0 3px",
@@ -82,7 +88,7 @@ const styles = {
     margin: "auto",
     flexDirection: "column",
   }),
-  selected: {
-    backgroundColor: "#FDD835"
-  }
+  selected: css({
+    backgroundColor: "#FDD835",
+  }),
 }

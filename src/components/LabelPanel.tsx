@@ -11,34 +11,40 @@ import ReportIcon from "@material-ui/icons/Report"
 import DeleteIcon from "@material-ui/icons/Delete"
 import LensIcon from "@material-ui/icons/Lens"
 import Label from "./Label"
+import { Label as LabelModel } from "../models/gmail"
 
 interface LabelPanelProps {
-  custom: string[]
+  labels: LabelModel[]
 }
 
-const LabelPanel: FunctionComponent<LabelPanelProps> = ({ custom }) => {
+const LabelPanel: FunctionComponent<LabelPanelProps> = ({ labels }) => {
+  const systemLabels = labels.filter(label => label.type === "System")
+  const userLabels = labels.filter(label => label.type === "User")
+
   return (
     <div className={styles.labelPanel}>
       <Typography variant="h5" gutterBottom>
         Mail
       </Typography>
-      <Label name="Inbox" selected><InboxIcon style={styles.standardIcon} /></Label>
-      <Label name="Snoozed"><SnoozeIcon style={styles.standardIcon} /></Label>
-      <Label name="Important"><LabelImportantIcon style={styles.standardIcon} /></Label>
-      <Label name="Starred"><StarRateIcon /></Label>
-      <Label name="Sent"><SendIcon style={styles.standardIcon} /></Label>
-      <Label name="Drafts"><DraftsIcon style={styles.standardIcon} /></Label>
-      <Label name="Spam"><ReportIcon style={styles.standardIcon} /></Label>
-      <Label name="Trash"><DeleteIcon style={styles.standardIcon} /></Label>
+      {
+        systemLabels.map((label, index) => {
+          return (
+            <Label key={index} label={label}>
+              {STANDARD_ICONS[label.name]}
+            </Label>
+          )
+        }) 
+      }
       <div className={styles.buffer} />
       <Typography variant="h5">
         Folders
       </Typography>
       {
-        custom.map((label, index) => {
+        userLabels.map((label, index) => {
+          const color: string = label.color ? label.color.backgroundColor : "gray"
           return (
-            <Label key={index} name={label}>
-              <LensIcon style={{ height: "10px", color: "red" }} />
+            <Label key={index} label={label}>
+              <LensIcon style={{ height: "10px", color }} />
             </Label>
           )
         })
@@ -51,13 +57,13 @@ export default LabelPanel
 
 const styles = {
   labelPanel: css({
-    flex: "0 0 200px",
+    flex: "0 0 165px",
     padding: "20px 0",
     color: "#585858",
   }),
   label: css({
     display: "flex",
-    "align-items": "center",
+    alignItems: "center",
     color: "darkgray",
     padding: "5px 0",
   }),
@@ -67,4 +73,15 @@ const styles = {
   buffer: css({
     paddingTop: "10px",
   })
+}
+
+const STANDARD_ICONS: { [key: string]: JSX.Element } = {
+  "Inbox": <InboxIcon style={styles.standardIcon} />,
+  "Snoozed": <SnoozeIcon style={styles.standardIcon} />,
+  "Important": <LabelImportantIcon style={styles.standardIcon} />,
+  "Starred": <StarRateIcon />,
+  "Sent": <SendIcon style={styles.standardIcon} />,
+  "Drafts": <DraftsIcon style={styles.standardIcon} />,
+  "Spam": <ReportIcon style={styles.standardIcon} />,
+  "Trash": <DeleteIcon style={styles.standardIcon} />,
 }

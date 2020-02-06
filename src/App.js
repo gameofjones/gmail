@@ -1,7 +1,7 @@
 import 'typeface-roboto'
 import React from 'react'
 import { AppComponent } from "./components"
-import { MailContextProvider } from "./state/MailContext"
+import { MailContextProvider } from "./store/StoreProvider"
 
 function App() {
   return (

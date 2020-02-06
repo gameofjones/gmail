@@ -1,4 +1,4 @@
-import Labels from "./label-mocks"
+import Labels from "./labels"
 import Emails from "./emails"
 
 export {

@@ -1,16 +1,15 @@
 import 'typeface-roboto'
-import React, { useState, useContext, FunctionComponent, useEffect } from 'react'
-import { useAsyncEffect } from 'use-async-effect'
+import React, { FunctionComponent, useState, useEffect } from 'react'
 import Input from '@material-ui/core/Input'
 import SearchIcon from "@material-ui/icons/Search"
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Avatar from "@material-ui/core/Avatar"
 import { css } from "emotion"
 import { Logo, LabelPanel, EmailTab, PreviewPanel } from "."
-import { MailContextProvider, MailContext } from "../state/MailContext"
-import { Label, Email } from "../models/gmail"
-import { getLabels, getMessages } from "../api/MailApiMock"
-import { SET_EMAILS } from "../state/Actions"
+import { MailContextConsumer } from "../store/StoreProvider"
+import { Email } from "../models/gmail"
+import { Label as LabelModel } from "../models/gmail"
+import { getLabels } from '../api/MailApiMock';
 
 const mockEmails = [
   {
@@ -31,66 +30,59 @@ const mockEmails = [
 ]
 
 const AppComponent: FunctionComponent = () => {
-  let { state, dispatch } = useContext(MailContext)
-  const { selectedLabel, emails } = state
-  const [labels, setLabels] = useState<Label[]>([])
-  const setEmails = (emails: Email[]) => dispatch({ type: SET_EMAILS, payload: emails })
-
-  useAsyncEffect(async () => {
-    const labels = await getLabels()
-    const messages = await getMessages(selectedLabel.id)
-
-    setLabels(labels)
-    setEmails(messages)
-  }, [])
+  const [labels, setLabels] = useState<LabelModel[]>([])
 
   useEffect(() => {
-    console.log(state.emails)
-  })
+    if (labels.length === 0) {
+      getLabels().then(apiLabels => setLabels(apiLabels))
+    }
+  }, [labels])
 
   return (
-    <MailContextProvider>
-      <>
-        <div className={styles.header}>
-          <Logo />
-          <div className={styles.headerRight}>
-            <Avatar className={styles.avatar}>SM</Avatar>
+    <MailContextConsumer>
+      {(props) =>
+        <>
+          <div className={styles.header}>
+            <Logo />
+            <div className={styles.headerRight}>
+              <Avatar className={styles.avatar}>SM</Avatar>
+            </div>
           </div>
-        </div>
-        <div className={styles.toolbar}>
-          <Input
-            id="standard-adornment-amount"
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon style={{ color: "#2979FF" }}/>
-              </InputAdornment>
-            }
-          />
-        </div>
-        <div className={styles.panelContainer}> 
-          <LabelPanel labels={labels} />
-          <div className={styles.emailPanel}>
-            {
-              emails.map((email: Email, index: number) => 
-                <EmailTab
-                  key={index}
-                  index={index}
-                  subject={`Email: ${email.id}`}
-                  sender={"author@gmail.com"}
-                  sent={"Fri 3:20 PM"}
-                />
-              )
-            }
+          <div className={styles.toolbar}>
+            <Input
+              id="standard-adornment-amount"
+              startAdornment={
+                <InputAdornment position="start">
+                  <SearchIcon style={{ color: "#2979FF" }}/>
+                </InputAdornment>
+              }
+            />
           </div>
-          <PreviewPanel
-            sender={"Kiah Jones"}
-            recipients={["Madhu Rawat", "Deep Badesha"]}
-            subject={"First Email"}
-            body={""}
-          />
-        </div>
-      </>
-    </MailContextProvider>
+          <div className={styles.panelContainer}> 
+            <LabelPanel labels={labels} />
+            <div className={styles.emailPanel}>
+              {
+                props.state.emails.map((email: Email, index: number) => 
+                  <EmailTab
+                    key={index}
+                    index={index}
+                    subject={`Email: ${email.id}`}
+                    sender={"author@gmail.com"}
+                    sent={"Fri 3:20 PM"}
+                  />
+                )
+              }
+            </div>
+            <PreviewPanel
+              sender={"Kiah Jones"}
+              recipients={["Madhu Rawat", "Deep Badesha"]}
+              subject={"First Email"}
+              body={""}
+            />
+          </div>
+        </>
+      }
+    </MailContextConsumer>
   )
 }
 

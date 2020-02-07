@@ -58,6 +58,14 @@ const AppComponent: FunctionComponent = () => {
                   )}
                 )
               }
+              {
+                props.state.messages.length === 0 &&
+                <div style={{ textAlign: "center" }}>
+                  <img width="300px" src="https://cdn4.iconfinder.com/data/icons/flatified/512/envelope.png" />
+                  <br />
+                  <label>Nothing in {state.selectedLabel.name}!</label>
+                </div>
+              }
             </div>
             <PreviewPanel
               sender={"Kiah Jones"}

@@ -12,7 +12,7 @@ const Logo: FunctionComponent = () => {
         <img
           alt=""
           className={styles.image}
-          src="https://1.bp.blogspot.com/-YNmaVFHh3IQ/W64nZpR860I/AAAAAAAAEbA/BnSQt9Fnz7M4g6Z4AncopinWUWbvBMnzwCPcBGAYYCw/s1600/Google%2BMail.png" />
+          src="https://lh3.googleusercontent.com/proxy/vdq9qUoDL2RB20Y9hxeXtnFL-3Z-x161Z5YNfZ8TkXFa4yZ8eUHz68QB57oj4mLwnF-hfP6gsruIEeV7MZ4rn0gc7Vj1pk7qVDMNtqoJVlTFfoWViVtIkUFoU2XUFcNZOGqY1aU" />
       </Typography>
     </div>
   )
@@ -26,9 +26,9 @@ const styles = {
     padding: "15px 15px 15px 30px",
   }),
   image: css({
-    height: "42px",
-    margin: "-9px",
-    paddingLeft: "10px",
+    height: "39px",
+    margin: "-7px",
+    paddingLeft: "16px",
   }),
   logo: css({
     flex: 1,

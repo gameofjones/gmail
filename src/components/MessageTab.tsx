@@ -1,22 +1,48 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import { css, cx } from "emotion"
 import Typography from "@material-ui/core/Typography"
 import AttachFileIcon from "@material-ui/icons/AttachFile"
+import { Message, MessagePartHeader } from "../models/gmail"
 
-interface EmailTabProps {
+const HEADERS = {
+  SUBJECT: "subject",
+  FROM: "from",
+}
+
+interface MessageComponentProps {
   index: number
-  subject: string
-  sender: string,
+  message: Message
   sent: string,
   selected?: boolean,
 }
 
-const EmailTab: FunctionComponent<EmailTabProps> = ({ index, subject, sender, sent, selected }) => {
+const getMessageHeader = (name: string, headers?: MessagePartHeader[]) => {
+  if (!headers) return undefined
+  const header = headers.find(header => header.name === name)
+
+  if (!header) return undefined
+  return header.value
+}
+
+const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, message, sent, selected }) => {
   const [isSelected, setSelected] = useState(selected)
+  const [subject, setSubject] = useState("")
+  const [from, setFrom] = useState("")
+
+  useEffect(()=> {
+    if (message.payload) {
+      const { headers } = message.payload
+      const subject = getMessageHeader(HEADERS.SUBJECT, headers)
+      const from = getMessageHeader(HEADERS.FROM, headers)
+
+      if (subject) setSubject(subject)
+      if (from) setFrom(from)
+    }
+  },[message.payload])
 
   return (
     <div
-      className={cx(styles.tab, { [styles.altBackground]: index%2 === 0 })}
+      className={cx(styles.message, { [styles.altBackground]: index%2 === 0 })}
       onClick={() => setSelected(!isSelected)}
     >
       <div className={cx(styles.leftSide, { [styles.selected]: isSelected })} />
@@ -28,7 +54,7 @@ const EmailTab: FunctionComponent<EmailTabProps> = ({ index, subject, sender, se
             display="block"
             style={styles.sender}
             gutterBottom>
-            {sender}
+            {from}
           </Typography>
         </div>
         <div className={styles.rightSide}>
@@ -46,10 +72,10 @@ const EmailTab: FunctionComponent<EmailTabProps> = ({ index, subject, sender, se
   )
 }
 
-export default EmailTab
+export default MessageComponent
 
 const styles = {
-  tab: css({
+  message: css({
     display: "flex",
     cursor: "pointer",
     backgroundColor: "#F9F9F8",
@@ -71,7 +97,7 @@ const styles = {
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    maxWidth: "285px",
+    maxWidth: "232px",
     display: "block",
     cursor: "pointer",
   }),

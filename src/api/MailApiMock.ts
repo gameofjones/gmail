@@ -1,5 +1,5 @@
-import { Label, Email } from "../models/gmail"
-import { Labels, Emails } from "../mocks"
+import { Label, Message } from "../models/gmail"
+import { Labels, Messages } from "../mocks"
 
 const getLabels = (): Promise<Label[]> => {
   return new Promise<Label[]>((resolve, reject) => {
@@ -7,9 +7,9 @@ const getLabels = (): Promise<Label[]> => {
   })
 }
 
-const getMessages = (labelId: string): Promise<Email[]> => {
-  return new Promise<Email[]>((resolve, reject) => {
-    resolve(Emails[labelId])
+const getMessages = (labelId: string): Promise<Message[]> => {
+  return new Promise<Message[]>((resolve, reject) => {
+    resolve(Messages[labelId])
   })
 }
 

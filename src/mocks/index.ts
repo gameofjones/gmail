@@ -1,7 +1,7 @@
 import Labels from "./labels"
-import Emails from "./emails"
+import Messages from "./messages"
 
 export {
   Labels,
-  Emails,
+  Messages,
 }

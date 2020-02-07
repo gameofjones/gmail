@@ -1,42 +1,28 @@
 import 'typeface-roboto'
-import React, { FunctionComponent, useState, useEffect } from 'react'
+import React, { FunctionComponent, useState, useEffect, useContext } from 'react'
 import Input from '@material-ui/core/Input'
 import SearchIcon from "@material-ui/icons/Search"
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Avatar from "@material-ui/core/Avatar"
 import { css } from "emotion"
-import { Logo, LabelPanel, EmailTab, PreviewPanel } from "."
+import { Logo, LabelPanel, MessageTab, PreviewPanel } from "."
 import { MailContextConsumer } from "../store/StoreProvider"
-import { Email } from "../models/gmail"
+import { Message } from "../models/gmail"
 import { Label as LabelModel } from "../models/gmail"
-import { getLabels } from '../api/MailApiMock';
-
-const mockEmails = [
-  {
-    subject: "First Email",
-    sender: "author@gmail.com",
-    sent: "8:08 AM"
-  },
-  {
-    subject: "Second Email with a longer name ya'llvgvggggggggg",
-    sender: "Kiah Jones",
-    sent: "Fri 3:20 PM"
-  },
-  {
-    subject: "Third Email",
-    sender: "Deep Badesha",
-    sent: "Fri 3:20 PM"
-  },
-]
+import { getLabels } from '../api/MailApiMock'
+import { setEmails } from '../store/actions'
+import { MailContext } from "../store/StoreProvider"
 
 const AppComponent: FunctionComponent = () => {
+  let { state, dispatch } = useContext(MailContext)
   const [labels, setLabels] = useState<LabelModel[]>([])
 
   useEffect(() => {
     if (labels.length === 0) {
       getLabels().then(apiLabels => setLabels(apiLabels))
+      setEmails(dispatch, state.selectedLabel)
     }
-  }, [labels])
+  }, [labels, dispatch, state.selectedLabel])
 
   return (
     <MailContextConsumer>
@@ -60,16 +46,16 @@ const AppComponent: FunctionComponent = () => {
           </div>
           <div className={styles.panelContainer}> 
             <LabelPanel labels={labels} />
-            <div className={styles.emailPanel}>
+            <div className={styles.messagePanel}>
               {
-                props.state.emails.map((email: Email, index: number) => 
-                  <EmailTab
+                props.state.messages.map((message: Message, index: number) =>  {
+                  return <MessageTab
                     key={index}
                     index={index}
-                    subject={`Email: ${email.id}`}
-                    sender={"author@gmail.com"}
+                    message={message}
                     sent={"Fri 3:20 PM"}
                   />
+                }
                 )
               }
             </div>
@@ -91,6 +77,8 @@ const appBorder = "2px solid #F4F4F4"
 const styles = {
   header: css({
     display: "flex",
+    position: "relative",
+    boxShadow: "0 2px 7px 0 rgba(0, 0, 0, 0.1), 0 6px 28px 0 rgba(0, 0, 0, -0.81)"
   }),
   headerRight: css({
     paddingRight: "30px",
@@ -113,15 +101,16 @@ const styles = {
     padding: "0 30px 0",
     backgroundColor: "#FCFCFA",
     color: "#2962FF",
-    border: appBorder,
+    borderBottom: appBorder,
   }),
   panelContainer: css({
     height: "calc(100vh - 155px)",
     display: "flex",
     padding: "0 30px 0",
   }),
-  emailPanel: css({
+  messagePanel: css({
     flex: "0 400px",
+    overflowY: "auto",
     borderLeft: "1px solid #F4F4F4",
   }),
 }

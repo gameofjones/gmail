@@ -1,8 +1,8 @@
-import { Label, Email } from "../models/gmail"
+import { Label, Message } from "../models/gmail"
 
 export default interface MailState {
   labels: Label[]
-  emails: Email[],
+  messages: Message[],
   selectedLabel: Label,
-  selectedEmail: Email,
+  selectedMessage: Message,
 }

@@ -8,16 +8,18 @@ export interface Label {
   }
 }
 
-export interface Email {
-  id: string,
-  threadId?: string,
-  labelIds?: string[],
-  payload?: {
-    partId: string,
-    mimeType: string,
-    filename: string,
-    // todo: change to Resource later
-    body: boolean,
-    // need parts
-  },
+export interface MessagePartHeader {
+  name?: string
+  value?: string
+}
+
+interface MessagePart {
+  headers?: MessagePartHeader[]
+  parts?: MessagePart[]
+}
+
+export interface Message {
+  id?: string
+  labelIds?: string[];
+  payload?: MessagePart;
 }

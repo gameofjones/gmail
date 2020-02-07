@@ -1,5 +1,9 @@
 import { Message } from "../models/gmail"
 
+const randomDate = (): string => {
+  return new Date(+(new Date()) - Math.floor(Math.random()*10000000000)).toDateString()
+}
+
 const Messages: { [key: string]: Message[] } = {
   "1": [
     {
@@ -8,6 +12,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -17,6 +22,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Kiah Jones" },
           { name: "subject", value: "Second Email with a longer name ya'llvgvggggggggg" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -26,6 +32,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Kiah Jones" },
           { name: "subject", value: "Second Email with a longer name ya'llvgvggggggggg" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -38,6 +45,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -51,6 +59,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Deep Badesha" },
           { name: "subject", value: "Third Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -62,6 +71,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Kiah Jones" },
           { name: "subject", value: "Second Email with a longer name ya'llvgvggggggggg" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -73,6 +83,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -82,6 +93,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Deep Badesha" },
           { name: "subject", value: "Third Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -91,6 +103,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Deep Badesha" },
           { name: "subject", value: "Third Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -100,6 +113,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -109,6 +123,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Deep Badesha" },
           { name: "subject", value: "Third Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -118,6 +133,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Kiah Jones" },
           { name: "subject", value: "Second Email with a longer name ya'llvgvggggggggg" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -127,6 +143,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -136,6 +153,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Kiah Jones" },
           { name: "subject", value: "Second Email with a longer name ya'llvgvggggggggg" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -145,6 +163,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Deep Badesha" },
           { name: "subject", value: "Third Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -154,6 +173,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -163,6 +183,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Kiah Jones" },
           { name: "subject", value: "Second Email with a longer name ya'llvgvggggggggg" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -175,6 +196,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "Deep Badesha" },
           { name: "subject", value: "Third Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },
@@ -184,6 +206,7 @@ const Messages: { [key: string]: Message[] } = {
         headers:[
           { name: "from", value: "author@gmail.com" },
           { name: "subject", value: "First Email" },
+          { name: "date", value: randomDate() },
         ],
       }
     },

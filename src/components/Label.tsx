@@ -2,14 +2,14 @@ import React, { FunctionComponent, useContext, useEffect } from "react"
 import { css, cx } from "emotion"
 import Typography from "@material-ui/core/Typography"
 import { MailContext } from "../store/StoreProvider"
-import { setLabel, setEmails } from "../store/actions"
-import { Label as LabelModel } from "../models/gmail"
+import { setLabel, setMessages } from "../store/actions"
+import { Label } from "../models/gmail"
 
 interface LabelProps {
-  label: LabelModel,
+  label: Label,
 }
 
-const Label: FunctionComponent<LabelProps> = ({ label, children }) => {
+const LabelComponent: FunctionComponent<LabelProps> = ({ label, children }) => {
   let { state, dispatch } = useContext(MailContext)
   const { name, messagesUnread } = label
   const selected = state.selectedLabel.name === name
@@ -28,7 +28,7 @@ const Label: FunctionComponent<LabelProps> = ({ label, children }) => {
       className={cx(styles.label, { [styles.selected]: selected })}
       onClick={() => {
         setLabel(dispatch, label)
-        setEmails(dispatch, label)
+        setMessages(dispatch, label)
       }}
     >
       {children}
@@ -40,7 +40,7 @@ const Label: FunctionComponent<LabelProps> = ({ label, children }) => {
   )
 }
 
-export default Label
+export default LabelComponent
 
 const styles = {
   label: css({

@@ -5,12 +5,12 @@ import SearchIcon from "@material-ui/icons/Search"
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Avatar from "@material-ui/core/Avatar"
 import { css } from "emotion"
-import { Logo, LabelPanel, MessageTab, PreviewPanel } from "."
+import { Logo, LabelPanel, MessageComponent, PreviewPanel } from "."
 import { MailContextConsumer } from "../store/StoreProvider"
 import { Message } from "../models/gmail"
 import { Label as LabelModel } from "../models/gmail"
 import { getLabels } from '../api/MailApiMock'
-import { setEmails } from '../store/actions'
+import { setMessages } from '../store/actions'
 import { MailContext } from "../store/StoreProvider"
 
 const AppComponent: FunctionComponent = () => {
@@ -20,7 +20,7 @@ const AppComponent: FunctionComponent = () => {
   useEffect(() => {
     if (labels.length === 0) {
       getLabels().then(apiLabels => setLabels(apiLabels))
-      setEmails(dispatch, state.selectedLabel)
+      setMessages(dispatch, state.selectedLabel)
     }
   }, [labels, dispatch, state.selectedLabel])
 
@@ -49,13 +49,13 @@ const AppComponent: FunctionComponent = () => {
             <div className={styles.messagePanel}>
               {
                 props.state.messages.map((message: Message, index: number) =>  {
-                  return <MessageTab
-                    key={index}
-                    index={index}
-                    message={message}
-                    sent={"Fri 3:20 PM"}
-                  />
-                }
+                  return ( 
+                    <MessageComponent
+                      key={index}
+                      index={index}
+                      message={message}
+                    />
+                  )}
                 )
               }
             </div>

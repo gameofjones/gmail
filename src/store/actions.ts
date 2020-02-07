@@ -28,11 +28,11 @@ export const setLabel = (dispatch: React.Dispatch<ActionTypes>, label: Label) =>
   dispatch({ type: SET_LABEL, payload: label })
 }
 
-export const setEmail = (dispatch: React.Dispatch<ActionTypes>, message: Message) => {
+export const setMessage = (dispatch: React.Dispatch<ActionTypes>, message: Message) => {
   dispatch({ type: SET_MESSAGE, payload: message })
 }
 
-export const setEmails = async (dispatch: React.Dispatch<ActionTypes>, label: Label) => {
-  const emails = await getMessages(label.id)
-  dispatch({ type: SET_MESSAGES, payload: emails })
+export const setMessages = async (dispatch: React.Dispatch<ActionTypes>, label: Label) => {
+  const messages = await getMessages(label.id)
+  dispatch({ type: SET_MESSAGES, payload: messages })
 }

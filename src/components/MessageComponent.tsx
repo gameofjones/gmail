@@ -2,41 +2,44 @@ import React, { FunctionComponent, useState, useEffect } from "react"
 import { css, cx } from "emotion"
 import Typography from "@material-ui/core/Typography"
 import AttachFileIcon from "@material-ui/icons/AttachFile"
-import { Message, MessagePartHeader } from "../models/gmail"
+import { Message } from "../models/gmail"
 
 const HEADERS = {
   SUBJECT: "subject",
   FROM: "from",
+  DATE: "date",
 }
 
 interface MessageComponentProps {
   index: number
   message: Message
-  sent: string,
-  selected?: boolean,
 }
 
-const getMessageHeader = (name: string, headers?: MessagePartHeader[]) => {
-  if (!headers) return undefined
-  const header = headers.find(header => header.name === name)
-
-  if (!header) return undefined
-  return header.value
-}
-
-const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, message, sent, selected }) => {
-  const [isSelected, setSelected] = useState(selected)
+const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, message }) => {
+  const [isSelected, setSelected] = useState(false)
   const [subject, setSubject] = useState("")
   const [from, setFrom] = useState("")
+  const [date, setDate] = useState("")
 
   useEffect(()=> {
     if (message.payload) {
       const { headers } = message.payload
-      const subject = getMessageHeader(HEADERS.SUBJECT, headers)
-      const from = getMessageHeader(HEADERS.FROM, headers)
+
+      const getHeaderValue = (name: string) => {
+        if (!headers) return undefined
+        const header = headers.find(header => header.name === name)
+      
+        if (!header) return undefined
+        return header.value
+      }
+
+      const subject = getHeaderValue(HEADERS.SUBJECT)
+      const from = getHeaderValue(HEADERS.FROM)
+      const date = getHeaderValue(HEADERS.DATE)
 
       if (subject) setSubject(subject)
       if (from) setFrom(from)
+      if (date) setDate(date)
     }
   },[message.payload])
 
@@ -64,7 +67,7 @@ const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, mes
             display="block"
             style={styles.sender}
             gutterBottom>
-            {sent}
+            {date}
           </Typography>
         </div>
       </div>
@@ -113,6 +116,7 @@ const styles = {
     display: "flex",
     margin: "auto",
     flexDirection: "column",
+    textAlign: "center",
   }),
   selected: css({
     backgroundColor: "#FDD835",

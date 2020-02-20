@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "78ee227bd1076f5f5d5d4fc70e53bde6",
+    "revision": "5041642cb83c9eccb4fe5a8a5aab1c55",
     "url": "/gmail/index.html"
   },
   {
-    "revision": "7816d49b5f0583302033",
+    "revision": "7741c6af9fb225c62153",
     "url": "/gmail/static/css/2.596f7387.chunk.css"
   },
   {
-    "revision": "1a2e766c0f8f876a2ac2",
+    "revision": "c01a77b0023f7cd70c88",
     "url": "/gmail/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "7816d49b5f0583302033",
-    "url": "/gmail/static/js/2.b13bd9f7.chunk.js"
+    "revision": "7741c6af9fb225c62153",
+    "url": "/gmail/static/js/2.9f63839d.chunk.js"
   },
   {
-    "revision": "e2fc3609d47d90b8cc004bfe15ddf15e",
-    "url": "/gmail/static/js/2.b13bd9f7.chunk.js.LICENSE"
+    "revision": "fcd230e4eb651117a1c3384980f696f4",
+    "url": "/gmail/static/js/2.9f63839d.chunk.js.LICENSE"
   },
   {
-    "revision": "1a2e766c0f8f876a2ac2",
-    "url": "/gmail/static/js/main.7768b3e7.chunk.js"
+    "revision": "c01a77b0023f7cd70c88",
+    "url": "/gmail/static/js/main.8d970905.chunk.js"
   },
   {
     "revision": "538e5a03b10b6a4332e7",

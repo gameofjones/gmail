@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { css } from "emotion"
-import Typography from "@material-ui/core/Typography"
+import { Typography } from "./MaterialUI" 
 
 const Logo: FunctionComponent = () => {
   return (
@@ -17,8 +17,6 @@ const Logo: FunctionComponent = () => {
     </div>
   )
 }
-
-export default Logo
 
 const styles = {
   typography: css({
@@ -43,3 +41,5 @@ const styles = {
     color: "#FDD835",
   }),
 }
+
+export default Logo

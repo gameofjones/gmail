@@ -4,5 +4,5 @@ export default interface MailState {
   labels: Label[]
   messages: Message[],
   selectedLabel: Label,
-  selectedMessage: Message,
+  selectedMessage?: Message,
 }

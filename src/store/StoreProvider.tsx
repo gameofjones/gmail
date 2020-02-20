@@ -28,7 +28,7 @@ let initialState: MailState = {
     },
   ],
   messages: [],
-  selectedMessage: {},
+  selectedMessage: undefined,
   selectedLabel: { id: "1", name: "Inbox", type: "System", messagesUnread: 3 },
 }
 

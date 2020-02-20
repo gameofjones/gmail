@@ -58,7 +58,7 @@ const Labels: Label[] = [
     type: "User",
     messagesUnread: 0,
     color: {
-      backgroundColor: "red"      
+      backgroundColor: "green"      
     }
   },
   {
@@ -67,7 +67,7 @@ const Labels: Label[] = [
     type: "User",
     messagesUnread: 2,
     color: {
-      backgroundColor: "green"      
+      backgroundColor: "orange"      
     }
   },
 ]

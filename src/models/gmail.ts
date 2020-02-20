@@ -13,8 +13,14 @@ export interface MessagePartHeader {
   value?: string
 }
 
-interface MessagePart {
+interface MessagePartBody {
+  data?: string
+}
+
+export interface MessagePart {
+  body?: MessagePartBody
   headers?: MessagePartHeader[]
+  mimeType?: string
   parts?: MessagePart[]
 }
 

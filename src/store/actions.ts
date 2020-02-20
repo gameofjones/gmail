@@ -14,7 +14,7 @@ interface SetLabel {
 
 interface SetMessage {
   type: typeof SET_MESSAGE
-  payload: Message
+  payload: Message | undefined
 }
 
 interface SetMessages {
@@ -28,7 +28,7 @@ export const setLabel = (dispatch: React.Dispatch<ActionTypes>, label: Label) =>
   dispatch({ type: SET_LABEL, payload: label })
 }
 
-export const setMessage = (dispatch: React.Dispatch<ActionTypes>, message: Message) => {
+export const setMessage = (dispatch: React.Dispatch<ActionTypes>, message?: Message) => {
   dispatch({ type: SET_MESSAGE, payload: message })
 }
 

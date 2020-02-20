@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useContext, useEffect } from "react"
 import { css, cx } from "emotion"
-import Typography from "@material-ui/core/Typography"
+import { Typography } from "./MaterialUI"
 import { MailContext } from "../store/StoreProvider"
-import { setLabel, setMessages } from "../store/actions"
+import * as Actions from "../store/actions"
 import { Label } from "../models/gmail"
+import * as Constants from "../constants"
 
 interface LabelProps {
   label: Label,
@@ -15,7 +16,7 @@ const LabelComponent: FunctionComponent<LabelProps> = ({ label, children }) => {
   const selected = state.selectedLabel.name === name
 
   useEffect(() => {
-    let title = "GOJ Mail"
+    let title = Constants.APP_TITLE
     if (state.selectedLabel.messagesUnread) {
       title += ` (${state.selectedLabel.messagesUnread})`
     }
@@ -27,8 +28,10 @@ const LabelComponent: FunctionComponent<LabelProps> = ({ label, children }) => {
     <div
       className={cx(styles.label, { [styles.selected]: selected })}
       onClick={() => {
-        setLabel(dispatch, label)
-        setMessages(dispatch, label)
+        Actions.setLabel(dispatch, label)
+        Actions.setMessage(dispatch, undefined)
+        Actions.setMessages(dispatch, label)
+        
       }}
     >
       {children}
@@ -39,8 +42,6 @@ const LabelComponent: FunctionComponent<LabelProps> = ({ label, children }) => {
     </div>
   )
 }
-
-export default LabelComponent
 
 const styles = {
   label: css({
@@ -58,3 +59,5 @@ const styles = {
     fontWeight: "bold",
   })
 }
+
+export default LabelComponent

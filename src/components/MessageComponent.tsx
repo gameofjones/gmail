@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FunctionComponent, useState, useEffect, useContext } from "react"
 import { css, cx } from "emotion"
-import Typography from "@material-ui/core/Typography"
-import AttachFileIcon from "@material-ui/icons/AttachFile"
+import { AttachFileIcon, Typography } from "./MaterialUI"
 import { Message } from "../models/gmail"
+import { MailContext } from "../store/StoreProvider"
+import { setMessage } from "../store/actions"
 
 const HEADERS = {
   SUBJECT: "subject",
@@ -20,6 +21,8 @@ const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, mes
   const [subject, setSubject] = useState("")
   const [from, setFrom] = useState("")
   const [date, setDate] = useState("")
+
+  let { dispatch } = useContext(MailContext)
 
   useEffect(()=> {
     if (message.payload) {
@@ -46,7 +49,10 @@ const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, mes
   return (
     <div
       className={cx(styles.message, { [styles.altBackground]: index%2 === 0 })}
-      onClick={() => setSelected(!isSelected)}
+      onClick={() => {
+        setSelected(!isSelected)
+        setMessage(dispatch, message)
+      }}
     >
       <div className={cx(styles.leftSide, { [styles.selected]: isSelected })} />
       <div className={styles.contents}>
@@ -74,8 +80,6 @@ const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, mes
     </div>
   )
 }
-
-export default MessageComponent
 
 const styles = {
   message: css({
@@ -119,6 +123,8 @@ const styles = {
     textAlign: "center",
   }),
   selected: css({
-    backgroundColor: "#FDD835",
+    backgroundColor: "red",
   }),
 }
+
+export default MessageComponent

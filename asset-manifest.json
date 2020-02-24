@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/gmail/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/gmail/static/js/main.8d970905.chunk.js",
-    "main.js.map": "/gmail/static/js/main.8d970905.chunk.js.map",
+    "main.js": "/gmail/static/js/main.72778a14.chunk.js",
+    "main.js.map": "/gmail/static/js/main.72778a14.chunk.js.map",
     "runtime-main.js": "/gmail/static/js/runtime-main.b0b6eec8.js",
     "runtime-main.js.map": "/gmail/static/js/runtime-main.b0b6eec8.js.map",
     "static/css/2.596f7387.chunk.css": "/gmail/static/css/2.596f7387.chunk.css",
-    "static/js/2.9f63839d.chunk.js": "/gmail/static/js/2.9f63839d.chunk.js",
-    "static/js/2.9f63839d.chunk.js.map": "/gmail/static/js/2.9f63839d.chunk.js.map",
+    "static/js/2.46e35199.chunk.js": "/gmail/static/js/2.46e35199.chunk.js",
+    "static/js/2.46e35199.chunk.js.map": "/gmail/static/js/2.46e35199.chunk.js.map",
     "index.html": "/gmail/index.html",
-    "precache-manifest.4de5cffc68162a8cff3c25a2bdfa1b9d.js": "/gmail/precache-manifest.4de5cffc68162a8cff3c25a2bdfa1b9d.js",
+    "precache-manifest.4267e9f255d57198c16ea6d752b49d4f.js": "/gmail/precache-manifest.4267e9f255d57198c16ea6d752b49d4f.js",
     "service-worker.js": "/gmail/service-worker.js",
     "static/css/2.596f7387.chunk.css.map": "/gmail/static/css/2.596f7387.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/gmail/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.9f63839d.chunk.js.LICENSE": "/gmail/static/js/2.9f63839d.chunk.js.LICENSE",
+    "static/js/2.46e35199.chunk.js.LICENSE": "/gmail/static/js/2.46e35199.chunk.js.LICENSE",
     "static/media/index.css": "/gmail/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.b0b6eec8.js",
     "static/css/2.596f7387.chunk.css",
-    "static/js/2.9f63839d.chunk.js",
+    "static/js/2.46e35199.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.8d970905.chunk.js"
+    "static/js/main.72778a14.chunk.js"
   ]
 }

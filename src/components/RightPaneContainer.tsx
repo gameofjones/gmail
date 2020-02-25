@@ -18,22 +18,27 @@ const RightPaneContainer: FunctionComponent<ContainerProps> = ({ selectedMessage
     {
       !selectedMessage && 
       messages.length !== 0 &&
-      <EmptyState label="Select an item to read!" />
+      <div className={styles.emptyState}>
+        <EmptyState label="Select an item to read!" />
+      </div>
     }
     </div>
   )
 }
 
-const appBorder = "2px solid #F4F4F4"
+const appBorder = "1px solid #F4F4F4"
 
 const styles = {
   previewPanel: css({
     flex: 1,
     color: "#585858",
-    padding: "20px 30px",
+    padding: "20px 20px",
     overflowY: "auto",
     borderLeft: appBorder,
   }),
+  emptyState: css({
+    marginTop: "10%",
+  })
 }
 
 export default RightPaneContainer

@@ -5,10 +5,11 @@ import { MessageComponent, EmptyState } from "."
 
 interface PaneProps {
   selectedLabel: Label
+  selectedMessage: Message | undefined
   messages: Message[]
 }
 
-const MessagePane: FunctionComponent<PaneProps> = ({ selectedLabel, messages }) => {
+const MessagePane: FunctionComponent<PaneProps> = ({ selectedLabel, selectedMessage, messages }) => {
   return (
     <div className={styles.messagePane}>
     {
@@ -18,6 +19,7 @@ const MessagePane: FunctionComponent<PaneProps> = ({ selectedLabel, messages }) 
             key={index}
             index={index}
             message={message}
+            isSelected={message.id === selectedMessage?.id }
           />
         )}
       )

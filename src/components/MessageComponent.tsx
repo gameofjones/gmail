@@ -1,82 +1,63 @@
 import React, { FunctionComponent, useState, useEffect, useContext } from "react"
 import { css, cx } from "emotion"
-import { AttachFileIcon, Typography } from "./MaterialUI"
-import { Message } from "../models/gmail"
+import { AttachFileIcon, Typography, Card, CardContent } from "./MaterialUI"
+import { Message, HeaderMap } from "../models/gmail"
 import { MailContext } from "../store/StoreProvider"
 import { setMessage } from "../store/actions"
-
-const HEADERS = {
-  SUBJECT: "subject",
-  FROM: "from",
-  DATE: "date",
-}
+import { mapHeaders } from "../tools"
 
 interface MessageComponentProps {
   index: number
   message: Message
+  isSelected: boolean
 }
 
-const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, message }) => {
-  const [isSelected, setSelected] = useState(false)
-  const [subject, setSubject] = useState("")
-  const [from, setFrom] = useState("")
-  const [date, setDate] = useState("")
+const MessageComponent: FunctionComponent<MessageComponentProps> = ({ index, message, isSelected }) => {
+  const [headerMap, setHeaderMap] = useState<HeaderMap>()
 
   let { dispatch } = useContext(MailContext)
 
   useEffect(()=> {
     if (message.payload) {
       const { headers } = message.payload
-
-      const getHeaderValue = (name: string) => {
-        if (!headers) return undefined
-        const header = headers.find(header => header.name === name)
-      
-        if (!header) return undefined
-        return header.value
-      }
-
-      const subject = getHeaderValue(HEADERS.SUBJECT)
-      const from = getHeaderValue(HEADERS.FROM)
-      const date = getHeaderValue(HEADERS.DATE)
-
-      if (subject) setSubject(subject)
-      if (from) setFrom(from)
-      if (date) setDate(date)
+      const headerMap: HeaderMap | undefined = mapHeaders(headers)
+      setHeaderMap(headerMap)
     }
   },[message.payload])
 
   return (
     <div
-      className={cx(styles.message, { [styles.altBackground]: index%2 === 0 })}
+      className={styles.message}
       onClick={() => {
-        setSelected(!isSelected)
         setMessage(dispatch, message)
       }}
     >
       <div className={cx(styles.leftSide, { [styles.selected]: isSelected })} />
-      <div className={styles.contents}>
-        <div style={{ flex: 1 }}>
-          <label className={styles.subject}>{subject}</label>
-          <Typography
-            variant="caption"
-            display="block"
-            style={styles.sender}
-            gutterBottom>
-            {from}
-          </Typography>
+      {
+        headerMap &&
+        <div className={styles.contents}>
+          <div style={{ flex: 1 }}>
+            <label className={styles.subject}>{headerMap.subject}</label>
+            <Typography
+              variant="caption"
+              display="block"
+              style={styles.sender}
+              gutterBottom>
+              {headerMap.from}
+            </Typography>
+          </div>
+          <div className={styles.rightSide}>
+            <AttachFileIcon />
+            <Typography
+              variant="caption"
+              display="block"
+              style={styles.sender}
+              gutterBottom>
+              {headerMap.date}
+            </Typography>
+          </div>
         </div>
-        <div className={styles.rightSide}>
-          <AttachFileIcon />
-          <Typography
-            variant="caption"
-            display="block"
-            style={styles.sender}
-            gutterBottom>
-            {date}
-          </Typography>
-        </div>
-      </div>
+      }
     </div>
   )
 }
@@ -85,13 +66,11 @@ const styles = {
   message: css({
     display: "flex",
     cursor: "pointer",
-    backgroundColor: "#F9F9F8",
+    borderBottom: "1px solid #f4f4f4",
+    backgroundColor: "white",
     ":hover": {
       backgroundColor: "#BBDEFB"
     },
-  }),
-  altBackground: css({
-    backgroundColor: "#F1F1F1",
   }),
   contents: css({
     flex: 1,
@@ -123,7 +102,7 @@ const styles = {
     textAlign: "center",
   }),
   selected: css({
-    backgroundColor: "red",
+    backgroundColor: "#FFCA28",
   }),
 }
 

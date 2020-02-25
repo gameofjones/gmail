@@ -1,6 +1,6 @@
 import 'typeface-roboto'
 import React, { FunctionComponent, useState, useEffect, useContext } from 'react'
-import { Avatar } from "./MaterialUI"
+import { Avatar, CircularProgress } from "./MaterialUI"
 import { css } from "emotion"
 import { Logo, LabelPane, MessagePane, RightPaneContainer, Toolbar } from "."
 import { MailContextConsumer } from "../store/StoreProvider"
@@ -12,6 +12,8 @@ import { MailContext } from "../store/StoreProvider"
 const AppComponent: FunctionComponent = () => {
   let { state, dispatch } = useContext(MailContext)
   const { selectedLabel, selectedMessage, messages } = state
+
+  const [isLoading, setIsLoading] = useState(true)
   const [labels, setLabels] = useState<LabelModel[]>([])
 
   useEffect(() => {
@@ -19,7 +21,12 @@ const AppComponent: FunctionComponent = () => {
       getLabels().then(apiLabels => setLabels(apiLabels))
       setMessages(dispatch, state.selectedLabel)
     }
-  }, [labels, dispatch, state.selectedLabel])
+
+    if (labels.length > 0 && messages.length > 0) {
+      setIsLoading(false)
+    }
+
+  }, [labels, dispatch, state.selectedLabel, messages.length])
 
   return (
     <MailContextConsumer>
@@ -32,10 +39,19 @@ const AppComponent: FunctionComponent = () => {
             </div>
           </div>
           <Toolbar />
-          <div className={styles.panes}> 
-            <LabelPane labels={labels} />
-            <MessagePane selectedLabel={selectedLabel} messages={messages} />
-            <RightPaneContainer selectedMessage={selectedMessage} messages={messages} />
+          <div className={styles.panes}>
+          {
+            isLoading &&
+            <CircularProgress style={{ height: "80px", width: "80px", margin: "auto" }} />
+          }
+          {
+            !isLoading &&
+            <>
+              <LabelPane labels={labels} />
+              <MessagePane selectedLabel={selectedLabel} selectedMessage={selectedMessage} messages={messages} />
+              <RightPaneContainer selectedMessage={selectedMessage} messages={messages} />
+            </>
+          }
           </div>
         </>
       }
@@ -47,7 +63,8 @@ const styles = {
   header: css({
     display: "flex",
     position: "relative",
-    boxShadow: "0 2px 7px 0 rgba(0, 0, 0, 0.1), 0 6px 28px 0 rgba(0, 0, 0, -0.81)"
+    background: "black",
+    boxShadow: "0 2px 4px rgba(0,0,0,.5)",
   }),
   headerRight: css({
     paddingRight: "30px",
@@ -66,7 +83,7 @@ const styles = {
   panes: css({
     height: "calc(100vh - 155px)",
     display: "flex",
-    padding: "0 30px 0",
+    padding: "0 0 0 30px",
   }),
 }
 

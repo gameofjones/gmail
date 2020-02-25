@@ -29,3 +29,10 @@ export interface Message {
   labelIds?: string[];
   payload?: MessagePart;
 }
+
+export interface HeaderMap {
+  subject?: string
+  from?: string
+  date?: string
+  tos?: MessagePartHeader[]
+}

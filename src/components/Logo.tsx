@@ -5,10 +5,8 @@ import { Typography } from "./MaterialUI"
 const Logo: FunctionComponent = () => {
   return (
     <div className={styles.logo}>
-      <Typography variant="h4" className={styles.typography} style={{ fontWeight: "bold" }}>
-        <label className={styles.G}>G</label>
-        <label className={styles.O}>O</label>
-        <label className={styles.J}>J</label>
+      <Typography variant="h4" className={styles.typography} style={{ fontWeight: "bold", color: "white" }}>
+        GOJ
         <img
           alt=""
           className={styles.image}
@@ -30,15 +28,6 @@ const styles = {
   }),
   logo: css({
     flex: 1,
-  }),
-  G: css({
-    color: "#2979FF",
-  }),
-  O: css({
-    color: "red",
-  }),
-  J: css({
-    color: "#FDD835",
   }),
 }
 

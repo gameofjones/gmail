@@ -1,7 +1,5 @@
 import AttachFileIcon from "@material-ui/icons/AttachFile"
 import Avatar from "@material-ui/core/Avatar"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import DraftsIcon from "@material-ui/icons/Drafts"
 import DeleteIcon from "@material-ui/icons/Delete"
@@ -20,8 +18,6 @@ import Typography from "@material-ui/core/Typography"
 export {
   Avatar,
   AttachFileIcon,
-  Card,
-  CardContent,
   CircularProgress,
   DraftsIcon,
   DeleteIcon,

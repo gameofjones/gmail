@@ -1,4 +1,4 @@
-import { ActionTypes, SET_LABEL, SET_MESSAGE, SET_MESSAGES } from "./actions"
+import { ActionTypes, SET_LABEL, SET_MESSAGE, SET_MESSAGES, SET_STATE } from "./actions"
 import MailState from "./state"
 
 const mailReducer = (state: MailState, action: ActionTypes): MailState => {
@@ -9,6 +9,8 @@ const mailReducer = (state: MailState, action: ActionTypes): MailState => {
       return { ...state, selectedMessage: action.payload }
     case SET_MESSAGES:
       return { ...state, messages: action.payload }
+    case SET_STATE:
+      return { ...state, ...action.payload }
     default:
       return state
   }

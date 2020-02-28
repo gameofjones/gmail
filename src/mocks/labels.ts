@@ -1,6 +1,6 @@
 import { Label } from "../models/gmail"
 
-const Labels: Label[] = [
+const labels: Label[] = [
   {
     id: "1",
     name: "Inbox",
@@ -72,4 +72,4 @@ const Labels: Label[] = [
   },
 ]
 
-export default Labels
+export default labels

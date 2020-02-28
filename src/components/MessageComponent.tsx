@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useContext } from "react"
 import { css, cx } from "emotion"
-import { AttachFileIcon, Typography, Card, CardContent } from "./MaterialUI"
+import { AttachFileIcon, Typography } from "./MaterialUI"
 import { Message, HeaderMap } from "../models/gmail"
 import { MailContext } from "../store/StoreProvider"
 import { setMessage } from "../store/actions"

@@ -5,6 +5,7 @@ import { MailContext } from "../store/StoreProvider"
 import * as Actions from "../store/actions"
 import { Label } from "../models/gmail"
 import * as Constants from "../constants"
+import { getMessagesByLabelId } from "../api/MailApiMock"
 
 interface LabelProps {
   label: Label,
@@ -13,11 +14,11 @@ interface LabelProps {
 const LabelComponent: FunctionComponent<LabelProps> = ({ label, children }) => {
   let { state, dispatch } = useContext(MailContext)
   const { name, messagesUnread } = label
-  const selected = state.selectedLabel.name === name
+  const selected = (state.selectedLabel?.name || "") === name
 
   useEffect(() => {
     let title = Constants.APP_TITLE
-    if (state.selectedLabel.messagesUnread) {
+    if (state.selectedLabel && state.selectedLabel.messagesUnread) {
       title += ` (${state.selectedLabel.messagesUnread})`
     }
 
@@ -27,11 +28,15 @@ const LabelComponent: FunctionComponent<LabelProps> = ({ label, children }) => {
   return (
     <div
       className={cx(styles.label, { [styles.selected]: selected })}
-      onClick={() => {
-        Actions.setLabel(dispatch, label)
-        Actions.setMessage(dispatch, undefined)
-        Actions.setMessages(dispatch, label)
-        
+      onClick={async() => {
+        const messages = await getMessagesByLabelId(label.id)
+
+        Actions.setState(dispatch, { 
+          selectedLabel: label,
+          selectedMessage: undefined,
+          labels: state.labels,
+          messages 
+        })
       }}
     >
       {children}

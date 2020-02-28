@@ -42,7 +42,7 @@ const examplePayload3: MessagePart = {
   }
 }
 
-const Messages: { [key: string]: Message[] } = {
+const messages: { [key: string]: Message[] } = {
   "1": [
     {
       id: "1",
@@ -137,4 +137,4 @@ const Messages: { [key: string]: Message[] } = {
   ],
 }
 
-export default Messages
+export default messages

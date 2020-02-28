@@ -1,13 +1,32 @@
-import React, { FunctionComponent, ChangeEvent } from "react"
+import React, { FunctionComponent, KeyboardEvent, useContext } from "react"
 import { css } from "emotion"
 import { Input, InputAdornment, SearchIcon } from "./MaterialUI"
+import { queryMessages } from "../api/MailApiMock"
+import { MailContext } from "../store/StoreProvider"
+import { setState } from "../store/actions"
 
 const Toolbar: FunctionComponent = () => {
+  const { state, dispatch } = useContext(MailContext)
+
+  const handleChange = async (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const { value } = (e.target as HTMLInputElement)
+      const messages = await queryMessages(value)
+  
+      setState(dispatch, {
+        selectedLabel: undefined,
+        selectedMessage: undefined,
+        labels: state.labels,
+        messages: messages,
+      })
+    }
+  }
+
   return (
     <div className={styles.toolbar}>
       <Input
         id="standard-adornment-amount"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
+        onKeyDown={handleChange}
         startAdornment={
           <InputAdornment position="start">
             <SearchIcon style={{ color: "#2979FF" }}/>

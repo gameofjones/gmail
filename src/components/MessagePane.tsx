@@ -4,8 +4,8 @@ import { Label, Message } from "../models/gmail"
 import { MessageComponent, EmptyState } from "."
 
 interface PaneProps {
-  selectedLabel: Label
-  selectedMessage: Message | undefined
+  selectedLabel?: Label
+  selectedMessage?: Message
   messages: Message[]
 }
 
@@ -26,7 +26,7 @@ const MessagePane: FunctionComponent<PaneProps> = ({ selectedLabel, selectedMess
     }
     {
       messages.length === 0 &&
-      <EmptyState label={`Nothing in ${selectedLabel.name}!`} />
+      <EmptyState label={`Nothing in ${selectedLabel?.name}!`} />
     }
   </div>
   )

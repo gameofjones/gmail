@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { css } from "emotion"
+import envelope from "../resources/envelope.png"
 
 interface EmptyStateProps {
   label: string
@@ -8,7 +9,7 @@ interface EmptyStateProps {
 const EmptyState: FunctionComponent<EmptyStateProps> = ({ label }) => {
   return (
     <div className={styles.emptyState}>
-      <img width="275px" alt="" src="https://cdn4.iconfinder.com/data/icons/flatified/512/envelope.png" />
+      <img width="275px" alt="" src={envelope} />
       <br />
       <label>{label}</label>
     </div>

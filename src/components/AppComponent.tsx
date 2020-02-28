@@ -5,7 +5,7 @@ import { css } from "emotion"
 import { Logo, LabelPane, MessagePane, RightPaneContainer, Toolbar } from "."
 import { MailContextConsumer } from "../store/StoreProvider"
 import { Label as LabelModel } from "../models/gmail"
-import { getLabels } from '../api/MailApiMock'
+import { getLabels, getMessagesByLabelId } from '../api/MailApiMock'
 import { setMessages } from '../store/actions'
 import { MailContext } from "../store/StoreProvider"
 
@@ -17,9 +17,16 @@ const AppComponent: FunctionComponent = () => {
   const [labels, setLabels] = useState<LabelModel[]>([])
 
   useEffect(() => {
+    const setMessagesByLabel = async () => {
+      if (state.selectedLabel) {
+        const messages = await getMessagesByLabelId(state.selectedLabel.id)
+        setMessages(dispatch, messages)
+      }
+    }
+
     if (labels.length === 0) {
       getLabels().then(apiLabels => setLabels(apiLabels))
-      setMessages(dispatch, state.selectedLabel)
+      setMessagesByLabel()
     }
 
     if (labels.length > 0 && messages.length > 0) {
